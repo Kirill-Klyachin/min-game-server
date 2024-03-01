@@ -1,7 +1,5 @@
-import express, { Express, Application, Request, Response } from "express";
+import express, { Application } from "express";
 import cors, { CorsOptions } from "cors";
-import fs from "fs";
-import dotenv from "dotenv";
 import { Routes } from "./router";
 import "./ws";
 // --ignore DATABASE/
@@ -10,16 +8,21 @@ import "./ws";
 
 dotenv.config(); */
 
+const WHITE_LIST: string[] = [
+  process.env.CLIENT_URL ?? "",
+  process.env.CLIENT_URL_2 ?? "",
+  process.env.CLIENT_URL_3 ?? "",
+];
+
 export class Server {
   constructor(app: Application) {
     this.config(app);
-    this.connectToDataBase();
     new Routes(app);
   }
 
   private config(app: Application) {
     const corsOptions: CorsOptions = {
-      origin: process.env.CLIENT_URL,
+      origin: WHITE_LIST,
       credentials: true,
     };
 
@@ -27,8 +30,6 @@ export class Server {
     app.use(express.json());
     //app.use(express.urlencoded({ extended: true }));
   }
-
-  private connectToDataBase() {}
 }
 
 /* const corsOptions: CorsOptions = {

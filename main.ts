@@ -7,10 +7,11 @@ import { connectionUsersDB } from "./src/db";
 dotenv.config();
 const app: Application = express();
 
-connectionUsersDB.connect(function (err) {
+connectionUsersDB.connect((err) => {
   if (err) throw err;
   console.log("You are now connected...");
 });
+
 const server = new Server(app);
 //startServer(app);
 const PORT = Number(process.env.PORT) || 3000;
