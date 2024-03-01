@@ -8,7 +8,10 @@ dotenv.config();
 const app: Application = express();
 
 connectionUsersDB.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.log("ERROR");
+    throw err;
+  }
   console.log("You are now connected...");
 });
 
