@@ -13,7 +13,7 @@ connectionUsersDB.connect(function (err) {
 });
 const server = new Server(app);
 //startServer(app);
-const PORT = Number(/* process.env.PORT */) || 4040;
+const PORT = Number(process.env.PORT) || 4040;
 const SERVER_DOMEN = process.env.SERVER_DOMEN ?? "localhost";
 
 app
